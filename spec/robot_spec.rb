@@ -1,5 +1,6 @@
 require 'rspec'
 require_relative '../lib/robot'
+require_relative '../lib/table'
 
 describe Robot do
 
@@ -14,6 +15,10 @@ describe Robot do
 
       it 'should have commands' do
         expect(robot.commands).to match_array(commands)
+      end
+
+      it 'should have an instance of table' do
+        expect(robot.table).to be_instance_of(Table)
       end
     end
 
