@@ -1,4 +1,4 @@
-require 'table'
+require_relative 'table'
 
 class Robot
 
