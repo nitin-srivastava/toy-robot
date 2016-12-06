@@ -45,11 +45,16 @@ class Robot
   end
 
   def move
-    case self.orientation
-      when 'NORTH' then self.y_coordinate += 1
-      when 'EAST' then self.x_coordinate += 1
-      when 'SOUTH' then self.y_coordinate -= 1
-      when 'WEST' then self.x_coordinate -= 1
+    begin
+      place_first
+      case self.orientation
+        when 'NORTH' then self.y_coordinate += 1
+        when 'EAST' then self.x_coordinate += 1
+        when 'SOUTH' then self.y_coordinate -= 1
+        when 'WEST' then self.x_coordinate -= 1
+      end
+    rescue => e
+      @error.puts e.message
     end
   end
 

@@ -102,6 +102,11 @@ describe Robot do
       it 'should move one step towards orientation' do
         expect(robot.x_coordinate).to eq 3
       end
+
+      let(:new_robot) { Robot.new(commands) }
+      it 'should be ignored the command if robot has not placed' do
+        expect { new_robot.move }.to raise_error 'Please place your robot first.'
+      end
     end
 
   end
