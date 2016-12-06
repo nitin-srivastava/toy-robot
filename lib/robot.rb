@@ -16,9 +16,9 @@ class Robot
   def start
     commands.each do |command|
       cmd, args = command.split(' ')
-      return self.send(cmd.downcase, args.split(',')) if cmd.eql?('PLACE')
+      execute(cmd, args)
+
     end
-    true
   end
 
   # place robot on table
@@ -74,6 +74,11 @@ class Robot
   end
 
   private
+
+  def execute(command, args)
+    return self.send(command.downcase, args.split(',')) if command.eql?('PLACE')
+    self.send(command.downcase)
+  end
 
   def is_valid_move
     valid =

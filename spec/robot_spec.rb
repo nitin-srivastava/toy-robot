@@ -136,10 +136,10 @@ describe Robot do
 
   describe '#start' do
     context 'When executing the commands' do
-      let(:place) { ['PLACE 1,2,NORTH'] }
-      let(:new_robot) { Robot.new(place) }
 
       context 'when place is executed then' do
+        let(:place) { ['PLACE 1,2,NORTH'] }
+        let(:new_robot) { Robot.new(place) }
         before { new_robot.start }
 
         it 'should have x coordinate 1' do
@@ -155,11 +155,45 @@ describe Robot do
         end
       end
 
-      # let(:new_robot) { Robot.new(commands) }
-      # it 'should execute the commands' do
-      #   expect(new_robot.start).to be true
-      # end
+      context 'when left command is executed then' do
+        let(:left) { ['PLACE 1,2,NORTH', 'LEFT'] }
+        let(:new_robot) { Robot.new(left) }
+        before { new_robot.start }
 
+        it 'should change the robot orientation to left' do
+          expect(new_robot.orientation).to eq 'WEST'
+        end
+      end
+
+      context 'when move command is executed then' do
+        let(:move) { ['PLACE 2,1,NORTH', 'LEFT', 'MOVE'] }
+        let(:new_robot) { Robot.new(move) }
+        before { new_robot.start }
+
+        it 'robot should be moved one step ahead towards orientation' do
+          expect(new_robot.x_coordinate).to eq 1
+        end
+      end
+
+      context 'when right command is executed then' do
+        let(:right) { ['PLACE 2,1,SOUTH', 'LEFT', 'LEFT', 'MOVE', 'RIGHT'] }
+        let(:new_robot) { Robot.new(right) }
+        before { new_robot.start }
+
+        it 'should change the robot orientation to right' do
+          expect(new_robot.orientation).to eq 'EAST'
+        end
+      end
+
+      context 'when report command is executed then' do
+        let(:report) { ['PLACE 2,1,SOUTH', 'LEFT', 'LEFT', 'MOVE', 'RIGHT', 'REPORT'] }
+        let(:new_robot) { Robot.new(report) }
+        before { new_robot.start }
+
+        it 'should announced the current position of the robot' do
+          expect { new_robot.report }.to output("2, 2, EAST\n").to_stdout
+        end
+      end
     end
   end
 
