@@ -20,7 +20,7 @@ There are two ways to run the application.
 
 1. ruby toy_robot.rb will wait for input from the keyboard. After specifying commands, press *ctrl-d* (assuming linux)
 
-2. ruby toy_robot.rb < commands-a.txt will read commands from the supplied text file. There are three sample commands files *(commands-a.txt, commands-b.txt, commands-c.txt)* available.
+2. ruby toy_robot.rb < commands-a.txt will read commands from the supplied text file. There are three sample commands files (**commands-a.txt, commands-b.txt, commands-c.txt**) available.
 
 ###Running the test
 
