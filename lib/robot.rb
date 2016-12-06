@@ -17,6 +17,7 @@ class Robot
     x, y, orientation = args
     begin
       validate_orientation(orientation)
+      validate_x_coordinate(x.to_i)
     rescue => e
       @error.puts e.message
     end
@@ -31,5 +32,8 @@ class Robot
     raise Exception.new("Invalid direction #{direction}. Valid directions are NORTH, EAST, SOUTH and WEST") unless table.directions.include?(direction)
   end
 
+  def validate_x_coordinate x
+    raise Exception.new("Invalid value 6 for x coordinate. It must be between 0 and 5 .") unless table.xaxis.cover?(x)
+  end
 
 end

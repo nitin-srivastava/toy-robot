@@ -41,9 +41,15 @@ describe Robot do
       end
     end
 
-    context 'When robot has placed on the table with wrong orientation then' do
+    context 'When place the robot with wrong orientation then' do
       it 'should raise an invalid orientation error' do
         expect { robot.place([1, 2, 'NORTHEAST']) }.to raise_error "Invalid direction NORTHEAST. Valid directions are NORTH, EAST, SOUTH and WEST"
+      end
+    end
+
+    context 'When place the robot with x coordinate exceeded to table then' do
+      it 'should raise an invalid x coordinate error' do
+        expect { robot.place([6, 2, 'NORTH']) }.to raise_error "Invalid value 6 for x coordinate. It must be between 0 and 5 ."
       end
     end
 
