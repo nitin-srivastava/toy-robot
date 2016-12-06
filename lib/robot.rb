@@ -36,7 +36,12 @@ class Robot
   end
 
   def right
-    self.orientation = table.directions[table.directions.index(orientation) + 1]
+    begin
+      place_first
+      self.orientation = table.directions[table.directions.index(orientation) + 1]
+    rescue => e
+      @error.puts e.message
+    end
   end
 
   private
