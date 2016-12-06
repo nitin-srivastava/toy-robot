@@ -77,4 +77,16 @@ describe Robot do
     end
   end
 
+  describe '#right' do
+
+    context 'When RIGHT command has given then' do
+
+      before { robot.place([2, 3, 'NORTH']) }
+      it 'should change the robot orientation to the right' do
+        expect(robot.right).to eq 'EAST'
+      end
+    end
+
+  end
+
 end
