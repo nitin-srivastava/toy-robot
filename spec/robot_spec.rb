@@ -120,4 +120,18 @@ describe Robot do
     end
   end
 
+  describe '#report' do
+    context 'When report command has given then' do
+      before do
+        robot.place([2, 3, 'EAST'])
+        robot.right
+        robot.move
+        robot.move
+      end
+      it 'robot current position should be announced' do
+        expect { robot.report }.to output("2, 1, SOUTH\n").to_stdout
+      end
+    end
+  end
+
 end

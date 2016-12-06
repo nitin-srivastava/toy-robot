@@ -59,6 +59,11 @@ class Robot
     end
   end
 
+  # announce robot position
+  def report
+    puts "#{self.x_coordinate}, #{self.y_coordinate}, #{self.orientation}"
+  end
+
   private
 
   def is_valid_move
