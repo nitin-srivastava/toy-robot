@@ -16,11 +16,7 @@ class Robot
   def start
     commands.each do |command|
       cmd, args = command.split(' ')
-      begin
-        execute(cmd, args)
-      rescue => e
-        @error.puts e.message
-      end
+      execute(cmd, args)
     end
   end
 
@@ -34,6 +30,7 @@ class Robot
     self.orientation = orientation
   end
 
+  # change orientation left
   def left
     begin
       place_first
@@ -43,6 +40,7 @@ class Robot
     end
   end
 
+  # change orientation right
   def right
     begin
       place_first
@@ -52,6 +50,7 @@ class Robot
     end
   end
 
+  # move one step
   def move
     begin
       place_first
@@ -75,10 +74,14 @@ class Robot
   private
 
   def execute(command, args)
-    is_valid_command command
-    place_first unless command.eql? 'PLACE'
-    return self.send(command.downcase, args.split(',')) if command.eql?('PLACE')
-    self.send(command.downcase)
+    begin
+      is_valid_command command
+      place_first unless command.eql? 'PLACE'
+      return self.send(command.downcase, args.split(',')) if command.eql?('PLACE')
+      self.send(command.downcase)
+    rescue => e
+      @error.puts e.message
+    end
   end
 
   def is_valid_command command
@@ -112,7 +115,7 @@ class Robot
   end
 
   def is_placed?
-    table.directions.include?(orientation) && table.xaxis.cover?(x_coordinate) && table.yaxis.cover?(y_coordinate)
+    self.table.directions.include?(self.orientation) && self.table.xaxis.cover?(self.x_coordinate) && self.table.yaxis.cover?(self.y_coordinate)
   end
 
 end
