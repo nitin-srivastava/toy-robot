@@ -194,6 +194,16 @@ describe Robot do
           expect { new_robot.report }.to output("2, 2, EAST\n").to_stdout
         end
       end
+
+      context 'when an invalid command is found then' do
+        let(:invalid_command) { ['PLACE 1,2,NORTH', 'TEST'] }
+        let(:new_robot) { Robot.new(invalid_command) }
+
+        it 'should raise an invalid command error' do
+          expect { new_robot.start }.to raise_error "Invalid command 'TEST'."
+        end
+
+      end
     end
   end
 

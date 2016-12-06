@@ -16,8 +16,12 @@ class Robot
   def start
     commands.each do |command|
       cmd, args = command.split(' ')
-      execute(cmd, args)
-
+      begin
+        is_valid_command cmd
+        execute(cmd, args)
+      rescue => e
+        @error.puts e.message
+      end
     end
   end
 
@@ -76,8 +80,13 @@ class Robot
   private
 
   def execute(command, args)
+    place_first unless command.eql? 'PLACE'
     return self.send(command.downcase, args.split(',')) if command.eql?('PLACE')
     self.send(command.downcase)
+  end
+
+  def is_valid_command command
+    raise Exception.new("Invalid command '#{command}'.") unless VALID_COMMANDS.include? command
   end
 
   def is_valid_move
