@@ -59,7 +59,17 @@ describe Robot do
         expect { robot.place([1, 7, 'NORTH']) }.to raise_error "Invalid value 7 for y coordinate. It must be between #{table.yaxis.min} and #{table.yaxis.max} ."
       end
     end
+  end
 
+  describe '#left' do
+    context 'When LEFT command has given then' do
+
+      before { robot.place([2, 3, 'NORTH']) }
+      it 'should change the robot orientation to the left' do
+        expect(robot.left).to eq 'WEST'
+      end
+
+    end
   end
 
 end

@@ -26,6 +26,10 @@ class Robot
     self.orientation = orientation
   end
 
+  def left
+    self.orientation = table.directions[table.directions.index(orientation) -1]
+  end
+
   private
 
   def validate_orientation direction
