@@ -47,6 +47,7 @@ class Robot
   def move
     begin
       place_first
+      is_valid_move
       case self.orientation
         when 'NORTH' then self.y_coordinate += 1
         when 'EAST' then self.x_coordinate += 1
@@ -59,6 +60,18 @@ class Robot
   end
 
   private
+
+  def is_valid_move
+    valid =
+      case self.orientation
+        when 'NORTH' then self.y_coordinate == table.yaxis.max
+        when 'EAST'  then self.x_coordinate == table.xaxis.max
+        when 'SOUTH' then self.y_coordinate == table.yaxis.min
+        when 'WEST'  then self.x_coordinate == table.xaxis.min
+        else false
+      end
+    raise Exception.new('Move will be unsafe. Turn first.') if valid
+  end
 
   def validate_orientation direction
     raise Exception.new("Invalid direction #{direction}. Valid directions are NORTH, EAST, SOUTH and WEST") unless table.directions.include?(direction)
@@ -77,4 +90,5 @@ class Robot
   def is_placed?
     table.directions.include?(orientation) && table.xaxis.cover?(x_coordinate) && table.yaxis.cover?(y_coordinate)
   end
+
 end

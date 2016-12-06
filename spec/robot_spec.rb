@@ -99,16 +99,25 @@ describe Robot do
         robot.move
       end
 
-      it 'should move one step towards orientation' do
+      it 'robot should move one step towards orientation' do
         expect(robot.x_coordinate).to eq 3
       end
 
       let(:new_robot) { Robot.new(commands) }
-      it 'should be ignored the command if robot has not placed' do
+      it 'should be ignored if robot has not placed' do
         expect { new_robot.move }.to raise_error 'Please place your robot first.'
       end
     end
 
+    context 'When move command is given and move is not safe then' do
+
+      let(:new_robot) { Robot.new(commands) }
+      before { new_robot.place([2, 5, 'NORTH']) }
+      it 'should raise an error' do
+        expect { new_robot.move }.to raise_error 'Move will be unsafe. Turn first.'
+      end
+
+    end
   end
 
 end
