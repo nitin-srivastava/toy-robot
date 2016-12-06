@@ -6,6 +6,7 @@ describe Robot do
 
   let(:commands) { ['PLACE 1,2,NORTH', 'RIGHT', 'MOVE', 'MOVE', 'REPORT']}
   let(:robot) { Robot.new(commands) }
+  let(:table) { robot.table }
 
   describe '#new' do
     context 'When robot is initialized' do
@@ -49,13 +50,13 @@ describe Robot do
 
     context 'When place the robot with x coordinate exceeded to table range then' do
       it 'should raise an invalid x coordinate error' do
-        expect { robot.place([6, 2, 'NORTH']) }.to raise_error "Invalid value 6 for x coordinate. It must be between 0 and 5 ."
+        expect { robot.place([6, 2, 'NORTH']) }.to raise_error "Invalid value 6 for x coordinate. It must be between #{table.xaxis.min} and #{table.xaxis.max} ."
       end
     end
 
     context 'When place the robot with y coordinate exceeded to table range then' do
       it 'should raise an invalid y coordinate error' do
-        expect { robot.place([1, 7, 'NORTH']) }.to raise_error "Invalid value 7 for y coordinate. It must be between 0 and 5 ."
+        expect { robot.place([1, 7, 'NORTH']) }.to raise_error "Invalid value 7 for y coordinate. It must be between #{table.yaxis.min} and #{table.yaxis.max} ."
       end
     end
 
