@@ -134,4 +134,33 @@ describe Robot do
     end
   end
 
+  describe '#start' do
+    context 'When executing the commands' do
+      let(:place) { ['PLACE 1,2,NORTH'] }
+      let(:new_robot) { Robot.new(place) }
+
+      context 'when place is executed then' do
+        before { new_robot.start }
+
+        it 'should have x coordinate 1' do
+          expect(new_robot.x_coordinate).to be 1
+        end
+
+        it 'should have y coordinate 2' do
+          expect(new_robot.y_coordinate).to be 2
+        end
+
+        it 'should have NORTH orientation' do
+          expect(new_robot.orientation).to eq 'NORTH'
+        end
+      end
+
+      # let(:new_robot) { Robot.new(commands) }
+      # it 'should execute the commands' do
+      #   expect(new_robot.start).to be true
+      # end
+
+    end
+  end
+
 end

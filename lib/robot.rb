@@ -2,7 +2,7 @@ require 'table'
 
 class Robot
 
-  VALID_COMMANDS = ['PLACE', 'LEFT','RIGHT','MOVE','REPORT']
+  VALID_COMMANDS = ['PLACE', 'LEFT', 'RIGHT', 'MOVE', 'REPORT']
 
   attr_accessor :commands, :table, :x_coordinate, :y_coordinate, :orientation
 
@@ -10,6 +10,15 @@ class Robot
     @commands = commands
     @error = stderr
     @table = Table.new()
+  end
+
+  # start executing commands
+  def start
+    commands.each do |command|
+      cmd, args = command.split(' ')
+      return self.send(cmd.downcase, args.split(',')) if cmd.eql?('PLACE')
+    end
+    true
   end
 
   # place robot on table
