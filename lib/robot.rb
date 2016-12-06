@@ -17,7 +17,6 @@ class Robot
     commands.each do |command|
       cmd, args = command.split(' ')
       begin
-        is_valid_command cmd
         execute(cmd, args)
       rescue => e
         @error.puts e.message
@@ -28,12 +27,8 @@ class Robot
   # place robot on table
   def place(args)
     x, y, orientation = args
-    begin
-      validate_orientation(orientation)
-      validate_coordinates({ 'x' => x.to_i, 'y' => y.to_i })
-    rescue => e
-      @error.puts e.message
-    end
+    validate_orientation(orientation)
+    validate_coordinates({ 'x' => x.to_i, 'y' => y.to_i })
     self.x_coordinate = x.to_i
     self.y_coordinate = y.to_i
     self.orientation = orientation
@@ -80,6 +75,7 @@ class Robot
   private
 
   def execute(command, args)
+    is_valid_command command
     place_first unless command.eql? 'PLACE'
     return self.send(command.downcase, args.split(',')) if command.eql?('PLACE')
     self.send(command.downcase)
