@@ -44,6 +44,15 @@ class Robot
     end
   end
 
+  def move
+    case self.orientation
+      when 'NORTH' then self.y_coordinate += 1
+      when 'EAST' then self.x_coordinate += 1
+      when 'SOUTH' then self.y_coordinate -= 1
+      when 'WEST' then self.x_coordinate -= 1
+    end
+  end
+
   private
 
   def validate_orientation direction

@@ -92,4 +92,18 @@ describe Robot do
     end
   end
 
+  describe '#move' do
+    context 'When move command has given then' do
+      before do
+        robot.place([2, 3, 'EAST'])
+        robot.move
+      end
+
+      it 'should move one step towards orientation' do
+        expect(robot.x_coordinate).to eq 3
+      end
+    end
+
+  end
+
 end
