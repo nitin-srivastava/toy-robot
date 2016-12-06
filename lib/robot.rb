@@ -27,7 +27,12 @@ class Robot
   end
 
   def left
-    self.orientation = table.directions[table.directions.index(orientation) -1]
+    begin
+      place_first
+      self.orientation = table.directions[table.directions.index(orientation) -1]
+    rescue => e
+      @error.puts e.message
+    end
   end
 
   private
@@ -42,4 +47,11 @@ class Robot
     end
   end
 
+  def place_first
+    raise Exception.new('Please place your robot first.') unless is_placed?
+  end
+
+  def is_placed?
+    table.directions.include?(orientation) && table.xaxis.cover?(x_coordinate) && table.yaxis.cover?(y_coordinate)
+  end
 end

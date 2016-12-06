@@ -69,6 +69,11 @@ describe Robot do
         expect(robot.left).to eq 'WEST'
       end
 
+      let(:new_robot) { Robot.new(commands) }
+
+      it 'should be ignored the command if robot has not placed' do
+        expect { new_robot.left }.to raise_error 'Please place your robot first.'
+      end
     end
   end
 
