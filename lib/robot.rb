@@ -18,6 +18,7 @@ class Robot
     begin
       validate_orientation(orientation)
       validate_x_coordinate(x.to_i)
+      validate_y_coordinate(y.to_i)
     rescue => e
       @error.puts e.message
     end
@@ -33,7 +34,11 @@ class Robot
   end
 
   def validate_x_coordinate x
-    raise Exception.new("Invalid value 6 for x coordinate. It must be between 0 and 5 .") unless table.xaxis.cover?(x)
+    raise Exception.new("Invalid value #{x} for x coordinate. It must be between 0 and 5 .") unless table.xaxis.cover?(x)
+  end
+
+  def validate_y_coordinate y
+    raise Exception.new("Invalid value #{y} for y coordinate. It must be between 0 and 5 .") unless table.yaxis.cover?(y)
   end
 
 end
