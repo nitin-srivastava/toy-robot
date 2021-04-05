@@ -1,10 +1,10 @@
-#Toy Robot Simulator
+# Toy Robot Simulator
 
-###About the application.
+### About the application.
 
 This application has been developed and tested in ruby 2.4.0.
 
-###Installation
+### Installation
 
 Clone the repo or get the zip.
 
@@ -14,7 +14,7 @@ gem install bundler
 
 bundle install
 
-###Running the application
+### Running the application
 
 There are two ways to run the application.
 
@@ -22,6 +22,6 @@ There are two ways to run the application.
 
 2. ruby toy_robot.rb < commands-a.txt will read commands from the supplied text file. There are three sample commands files (**commands-a.txt, commands-b.txt, commands-c.txt**) available.
 
-###Running the test
+### Running the test
 
 Tests can be run with "rspec spec"
